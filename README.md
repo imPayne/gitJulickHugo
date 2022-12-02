@@ -142,3 +142,18 @@ Loggez l'ensemble des commits, d'une manière concise afin de ne voir qu'une lig
 
 Loggez l'ensemble des commits afin d'y voir les branches et leurs hierarchies
 `git log --graph`
+
+## Exercice 8
+Prenons pour exemple que vous souhaitez partir d'une base d'un projet existant sur git mais que vous souhaitez contribuer au sein d'un autre dépôt.
+
+Vous pouevz lister les dépôts distants connus
+`git remote -v`
+
+Vous pouvez avoir plusieurs remote : 
+`git remote add <alias> <url>`
+
+Vous pouvez changer le dépôt existant
+`git remote set-url origin <url>`
+
+Vous pouvez supprimer une référence vers un dépôt distant
+`git remote remove origin`
