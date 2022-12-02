@@ -1,92 +1,144 @@
-# Git
+# Exercices sur git
 
+Il existe plusieurs outils permettant le versionning de fichiers. 
+Il s'avère qu'aujourd'hui, l'outil le plus utilisé est git.
 
+Voici quelques exercices permettant de découvrir quelques subtilisés de git.
 
-## Getting started
+## Exercice N°1
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+> Le but de cet exercice est de découvrir les conflits de merge. 
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+A réaliser en binômes. 
+Créer un dépôt git privé et attribuez-vous les droits afin de contribuer ensemble au sein de ce dépôt. 
+Lors de la génération de ce dépôt, activez le fait d'avoir un fichier `README.md`.
+Clonez ce dépôts sur vos machines respectives. 
 
-## Add your files
+Sur chaque machine, modifiez le fichier `README.md` afin d'y ajouter vos propres messages. 
+Assurez-vous de bien travailler en même temps sur le fichier et d'y saisir des informations différentes. L'objectif étant que vous vous retrouviez à modifier simultanément les mêmes lignes d'un fichier. 
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+Puis, une fois satisfaits, réalisez un `git add` puis `git commit` puis un `git push`.
+La première personne à envoyer le code ne devrait pas avoir de problème, le second oui. Résolvez ensemble le conflit de merge par le biais d'un IDE.
 
+## Exercice N°2
+
+> Découverte de ce qui ne génère pas de conflit
+
+Toujours au sein du même dépôt, et toujours en binômes. 
+Ajoutez simultanément un fichier ayant le même nom, "fichier1.txt" au sein du dossier. Laissez tous les deux ce fichier vide.
+Puis, une fois satisfaits, réalisez un `git add` puis `git commit` puis un `git push`.
+Vous ne devriez pas rencontrer de problème.
+
+Ajoutez simultanément un fichier ayant le même nom, "fichier2.txt" au sein du dossier. Ecrivez tous les deux le même texte dans le fichier.
+Puis, une fois satisfaits, réalisez un `git add` puis `git commit` puis un `git push`.
+Vous ne devriez pas rencontrer de problème.
+
+## Exercice 3
+
+> Découverte des limites de git et de sa gestion des conflits
+
+Au sein d'un des dépôts, créez un fichier `why_pijul.txt` contenant deux lignes : 
 ```
-cd existing_repo
-git remote add origin https://gitlab.com/docusland-courses/git.git
-git branch -M main
-git push -uf origin main
+A
+B
+```
+Par le biais de push pull assurez de l'avoir sur vos deux ordinateurs. 
+
+Sur le premier  ordinateur, modifiez le fichier pour qu'il soit comme ceci : 
+```
+A
+X
+B
 ```
 
-## Integrate with your tools
+Sur l'autre ordinateur, modifiez le fichier : 
+```
+G
+A
+B
+```
+Puis continuez à rajouter une ligne en haut du fichier : 
+```
+B
+G
+A
+B
+```
+Puis encore une fois
+```
+A
+B
+G
+A
+B
+```
+Réalisez vos push pull habituels et observez le résultat.
+Git lui-même s'emmêle un peu les pinceaux, et en fonction de ce que vous avez avez réalisé précisément, git peut même ne pas détecter d'incohérence et ne pas générer de conflit de merge.
+Vous trouverez une explication [ici](https://pijul.org/manual/why_pijul.html).
 
-- [ ] [Set up project integrations](https://gitlab.com/docusland-courses/git/-/settings/integrations)
 
-## Collaborate with your team
+## Exercice 4
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+> La gestion du stash
 
-## Test and Deploy
+Au sein d'un ordinateur, reprenez la rédaction du fichier `README.md` et réalisez votre commit, push. 
+Au sein de l'autre machine, editez également le fichier `README.md` et faites un `git pull`afin de récupérer les modifications apportées par votre binôme. 
+Votre système devrait refuser le pull et vous demander de commiter ou remiser votre travail. 
+Réalisez un git stash puis reprenez le pull. 
 
-Use the built-in continuous integration in GitLab.
+Votre travail n'a pas pour autant été perdu mais mis dans le stashed. Un espace tampon dans lequel vous pouvez stocker (sans pour autant commiter) vos modifications. 
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+Vous pouvez les voir en réalisant : 
+`git stash list`
 
-***
+puis 
+`git show stash@{0}`
 
-# Editing this README
+Et l'appliquer en réalisant 
+`git stash pop`.
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
+## Exercice 5
 
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+> La gestion du squash
 
-## Name
-Choose a self-explaining name for your project.
+Regardez tous l'historique de votre dépôt git  `git log`.
+Parfois il est intéressant de vouloir fusionner plusieurs commits afin de conserver un dépôt et une histoire propre. Cette manipulation est de préférence à réaliser sur des commits qui n'ont pas encore été poussés en ligne. Tout simplement car si d'autres développeurs sont en train de travailler en même temps sur votre dépôt, celà risque de poser des problèmes lors des fusions. 
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+Au sein de votre dossier réaliser : 
+`git rebase -i HEAD~3 `
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+Remplacez tous les `pick` par des `squash`.
+Modifiez le nom du commit
+Puis réaliser un `git push -f`.
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+Au sein du second dépôt, réalisez un git pull. Vous ne verrez plus du tout l'historique. 
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+## Exercice 6
+> La gestion des branches. 
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+Créer une branche
+`git branch nom-branch`
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+Switch sur la branche 
+`git checkout nom-branch`
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+Fusionner des branches 
+`git checkout main && git merge nom-branch`
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+Créer une branch et switch dessus d'un seul coup
+`git checkout -b nom-branch`
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+Déplacer la branche actuelle afin d'intégrer les derniers commits de la branche parente
+`git rebase main`
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+## Exercice 7
 
-## License
-For open source projects, say how it is licensed.
+Loggez l'ensemble des commits de la branche 
+`git log`
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+Loggez l'ensemble des commits, d'une manière concise afin de ne voir qu'une ligne par commit
+`git log --oneline`
+
+Loggez l'ensemble des commits afin d'y voir les branches et leurs hierarchies
+`git log --graph`
