@@ -10,15 +10,14 @@ Voici quelques exercices permettant de découvrir quelques subtilisés de git.
 > Le but de cet exercice est de découvrir les conflits de merge. 
 
 A réaliser en binômes. 
-Créer un dépôt git privé et attribuez-vous les droits afin de contribuer ensemble au sein de ce dépôt. 
-Lors de la génération de ce dépôt, activez le fait d'avoir un fichier `README.md`.
+Après avoir forké ce dépôt, définissez votre dépôt en privé et attribuez à votre binôme les droits afin de contribuer ensemble au sein de ce dépôt. 
 Clonez ce dépôts sur vos machines respectives. 
 
 Sur chaque machine, modifiez le fichier `README.md` afin d'y ajouter vos propres messages. 
 Assurez-vous de bien travailler en même temps sur le fichier et d'y saisir des informations différentes. L'objectif étant que vous vous retrouviez à modifier simultanément les mêmes lignes d'un fichier. 
 
 Puis, une fois satisfaits, réalisez un `git add` puis `git commit` puis un `git push`.
-La première personne à envoyer le code ne devrait pas avoir de problème, le second oui. Résolvez ensemble le conflit de merge par le biais d'un IDE.
+La première personne à envoyer le code ne devrait pas avoir de problème, le second oui. Résolvez ensemble le conflit de merge par le biais de la ligne de commande.
 
 ## Exercice N°2
 
@@ -32,6 +31,9 @@ Vous ne devriez pas rencontrer de problème.
 Ajoutez simultanément un fichier ayant le même nom, "fichier2.txt" au sein du dossier. Ecrivez tous les deux le même texte dans le fichier.
 Puis, une fois satisfaits, réalisez un `git add` puis `git commit` puis un `git push`.
 Vous ne devriez pas rencontrer de problème.
+
+Il vous est possible de continuer à voir le travail en collaboration par le biais de `git log`. 
+Vous avez aussi probablement une vue intéressant au sein de votre IDE .
 
 ## Exercice 3
 
@@ -94,16 +96,17 @@ Vous pouvez les voir en réalisant :
 puis 
 `git show stash@{0}`
 
-Et l'appliquer en réalisant 
-`git stash pop`.
+Et l'appliquer en réalisant `git stash pop` ou encore `git stash apply`. 
+Quelle est la différence entre ces deux méthodes ?
 
 ## Exercice 5
 
 > La gestion du squash
 
-Regardez tous l'historique de votre dépôt git  `git log`.
+Regardez tout l'historique de votre dépôt git  `git log`.
 Parfois il est intéressant de vouloir fusionner plusieurs commits afin de conserver un dépôt et une histoire propre. Cette manipulation est de préférence à réaliser sur des commits qui n'ont pas encore été poussés en ligne. Tout simplement car si d'autres développeurs sont en train de travailler en même temps sur votre dépôt, celà risque de poser des problèmes lors des fusions. 
 
+### Consignes
 Au sein de votre dossier réaliser : 
 `git rebase -i HEAD~3 `
 
@@ -116,6 +119,7 @@ Au sein du second dépôt, réalisez un git pull. Vous ne verrez plus du tout l'
 ## Exercice 6
 > La gestion des branches. 
 
+Voici des commandes qui pourront vous être utiles afin de pouvoir suivre les consignes de l'exercice. 
 
 Créer une branche
 `git branch nom-branch`
@@ -132,7 +136,25 @@ Créer une branch et switch dessus d'un seul coup
 Déplacer la branche actuelle afin d'intégrer les derniers commits de la branche parente
 `git rebase main`
 
+### Consignes
+
+Dans un contexte professionnel, le travail est souvent scindé en petites taches. Et il est d'usage de créer une branche par tache. 
+A partir de votre dépôt actuel, je vous demande de créer une tache "Générer une page phpinfo". 
+Les instructions à réaliser sont donc :
+ - Créez une branche `feature-phpinfo`
+ - Travaillez dans cette branche et créez le fichier: `echo "<?php phpinfo()" > index.php`
+ - Réalisez votre commit. 
+
+ Si vous retournez sur la branche `main`, vous verrez que le fichier n'existe pas. 
+
+ - Vous réalisez que vous avez oublié un `;` dans le fichier php car vous avez eu le bon reflexe de tester le fichier  `php -S localhost:`.
+ - Corrigez l'erreur et faites en sorte de n'avoir qu'un seul commit.
+
+ Fusionnez votre branche dans la branche main. 
+ N'oubliez pas, votre IDE et `git status` peuvent beaucoup vous servir pour visualiser ce qui se trame dans git. 
+
 ## Exercice 7
+> git log en ligne de commande
 
 Loggez l'ensemble des commits de la branche 
 `git log`
@@ -143,10 +165,13 @@ Loggez l'ensemble des commits, d'une manière concise afin de ne voir qu'une lig
 Loggez l'ensemble des commits afin d'y voir les branches et leurs hierarchies
 `git log --graph`
 
+
 ## Exercice 8
+> La gestion des remote
+
 Prenons pour exemple que vous souhaitez partir d'une base d'un projet existant sur git mais que vous souhaitez contribuer au sein d'un autre dépôt.
 
-Vous pouevz lister les dépôts distants connus
+Vous pouvez lister les dépôts distants connus
 `git remote -v`
 
 Vous pouvez avoir plusieurs remote : 
@@ -157,3 +182,28 @@ Vous pouvez changer le dépôt existant
 
 Vous pouvez supprimer une référence vers un dépôt distant
 `git remote remove origin`
+
+
+### Consignes
+Définissez un nouveau remote, hébergé au sein de profil github de votre binôme.
+Et synchronisez les deux comptes git. 
+
+Il est toujours bon de comprendre un concept quand on le découvre. Ainsi prenez le temps de comprendre ainsi les commandes `git push origin main` et autres.
+
+## Exercice 9
+> Le git --bare
+
+Il vous est possible de générer des dépots distants aussi sans `working directory` mais avec uniquement les fichiers internes de git. 
+
+Faites donc un `git clone --bare` de votre dépôt.
+Et définissez ce dossier en tant que remote
+
+Exemple : 
+```shell
+git clone <url> repository
+git clone --bare <url> bare-repository.git
+cd repository
+git remote add hello-world ../bare-repository.git
+```
+
+Ce qui peut vous servir de backup ou permettre de stocker vos dépôts ailleurs que chez gitlab, github, framagit, bitbucket ...
