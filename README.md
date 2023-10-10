@@ -9,7 +9,7 @@ Voici quelques exercices permettant de découvrir quelques subtilisés de git.
 
 > Le but de cet exercice est de découvrir les conflits de merge. 
 
-A réaliser en binômes. 
+A réaliser en ratbinômes. banane
 Après avoir forké ce dépôt, définissez votre dépôt en privé et attribuez à votre binôme les droits afin de contribuer ensemble au sein de ce dépôt. 
 Clonez ce dépôts sur vos machines respectives. 
 
