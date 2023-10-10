@@ -9,11 +9,7 @@ Voici quelques exercices permettant de découvrir quelques subtilisés de git.
 
 > Le but de cet exercice est de découvrir les conflits de merge. 
 
-<<<<<<< HEAD
-A réaliser en ratbinômes. banane
-=======
 Askip faut le faire en duo et moi j'ai bien faire chier donc je suis chiant.
->>>>>>> 67c1546ced2c0c400176e31113233ede7620554f
 Après avoir forké ce dépôt, définissez votre dépôt en privé et attribuez à votre binôme les droits afin de contribuer ensemble au sein de ce dépôt. 
 Clonez ce dépôts sur vos machines respectives. 
 
